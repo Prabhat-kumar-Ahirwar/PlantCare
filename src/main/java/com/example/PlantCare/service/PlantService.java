@@ -4,6 +4,7 @@ import com.example.PlantCare.model.Plant;
 import com.example.PlantCare.repository.PlantRepo;
 import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,10 @@ public class PlantService {
     public Plant addPlant(Plant plant) {
         plant.setAddedOn(LocalDate.now());
         return plantRepo.save(plant);
+    }
+
+    public ResponseEntity<List<Plant>> getPlant(){
+        return new ResponseEntity<>(plantRepo.findAll() , HttpStatus.OK);
     }
 
 }

@@ -18,6 +18,10 @@ public class PlantController {
     @PostMapping("/addplant")
     public ResponseEntity<Plant> AddingPlant(@RequestBody Plant plant){
         return ResponseEntity.ok(plantService.addPlant(plant));
+    }
 
+    @GetMapping("/getall")
+    public ResponseEntity<List<Plant>> getallPLant(){
+        return ResponseEntity.ok(plantService.getPlant());
     }
 }
