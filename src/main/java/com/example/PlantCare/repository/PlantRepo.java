@@ -4,7 +4,9 @@ import com.example.PlantCare.model.Plant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface PlantRepo extends JpaRepository<Plant , Long> {
+import java.util.List;
 
+@Repository
+public interface PlantRepo extends JpaRepository<Plant, Long> {
+    List<Plant> findByUserId(Long userId);
 }

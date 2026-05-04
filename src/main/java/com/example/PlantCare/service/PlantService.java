@@ -2,51 +2,54 @@ package com.example.PlantCare.service;
 
 import com.example.PlantCare.model.Plant;
 import com.example.PlantCare.repository.PlantRepo;
-import org.jspecify.annotations.Nullable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+
 
 @Service
+@RequiredArgsConstructor
 public class PlantService {
-
-
 
     private final PlantRepo plantRepo;
 
-    public PlantService(PlantRepo plantRepo) {
-        this.plantRepo = plantRepo;
-    }
-
-
+    // Add
     public Plant addPlant(Plant plant) {
         plant.setAddedOn(LocalDate.now());
         return plantRepo.save(plant);
     }
 
-    public List<Plant> getPlant(){
+    // Get all
+    public List<Plant> getPlant() {
         return plantRepo.findAll();
     }
 
-    public Plant updatePlant(Long id, Plant updatedPlant) {
-        Plant existing = getPlantById(id)
+    // Get by ID
+    public Plant getPlantById(Long id) {
+        return plantRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Plant not found with id: " + id));
+    }
 
+    // Get by userId
+    public List<Plant> getPlantsByUser(Long userId) {
+        return plantRepo.findByUserId(userId);
+    }
+
+    // Update
+    public Plant updatePlant(Long id, Plant updatedPlant) {
+        Plant existing = getPlantById(id);
         existing.setName(updatedPlant.getName());
         existing.setNickname(updatedPlant.getNickname());
         existing.setSpecies(updatedPlant.getSpecies());
         existing.setLocation(updatedPlant.getLocation());
         existing.setImageUrl(updatedPlant.getImageUrl());
-
         return plantRepo.save(existing);
     }
-    public Optional<Plant> getPlantById(Long id) {
-        return plantRepo.findById(id);
-    }
 
+    // Delete
+    public void deletePlant(Long id) {
+        plantRepo.deleteById(id);
+    }
 }
