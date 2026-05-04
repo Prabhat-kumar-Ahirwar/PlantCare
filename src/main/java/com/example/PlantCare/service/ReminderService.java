@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class ReminderService {
@@ -20,7 +19,8 @@ public class ReminderService {
     }
 
     public List<Reminder> getTodayReminders() {
-        return reminderRepo.findByDueDateAndIsDone(LocalDate.now(), false);
+        // findByDueDateAndDone
+        return reminderRepo.findByDueDateAndDone(LocalDate.now(), false);
     }
 
     public List<Reminder> getByPlant(Long plantId) {

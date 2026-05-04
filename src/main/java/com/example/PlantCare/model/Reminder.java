@@ -1,10 +1,7 @@
 package com.example.PlantCare.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,5 +23,7 @@ public class Reminder {
     private Long plantId;
     private String reminderType;  // "water", "fertilize", "repot"
     private LocalDate dueDate;
-    private boolean isDone;
+    @Column(name = "done", columnDefinition = "boolean default false")
+    private Boolean done = false;
+
 }

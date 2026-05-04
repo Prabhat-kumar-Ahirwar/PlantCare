@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
-
 @Repository
 public interface ReminderRepo extends JpaRepository<Reminder, Long> {
-    List<Reminder> findByDueDateAndIsDone(LocalDate date, boolean isDone);
+
+    List<Reminder> findByDueDateAndDone(LocalDate date, Boolean done);
+
     List<Reminder> findByPlantId(Long plantId);
 }
