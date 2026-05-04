@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlantService {
@@ -28,8 +29,24 @@ public class PlantService {
         return plantRepo.save(plant);
     }
 
-    public ResponseEntity<List<Plant>> getPlant(){
-        return new ResponseEntity<>(plantRepo.findAll() , HttpStatus.OK);
+    public List<Plant> getPlant(){
+        return plantRepo.findAll();
+    }
+
+    public Plant updatePlant(Long id, Plant updatedPlant) {
+        Plant existing = getPlantById(id)
+                .orElseThrow(() -> new RuntimeException("Plant not found with id: " + id));
+
+        existing.setName(updatedPlant.getName());
+        existing.setNickname(updatedPlant.getNickname());
+        existing.setSpecies(updatedPlant.getSpecies());
+        existing.setLocation(updatedPlant.getLocation());
+        existing.setImageUrl(updatedPlant.getImageUrl());
+
+        return plantRepo.save(existing);
+    }
+    public Optional<Plant> getPlantById(Long id) {
+        return plantRepo.findById(id);
     }
 
 }
