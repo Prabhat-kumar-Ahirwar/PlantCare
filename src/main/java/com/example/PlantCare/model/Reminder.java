@@ -2,6 +2,7 @@ package com.example.PlantCare.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,10 +21,21 @@ public class Reminder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Plant id is required")
+    @Positive(message = "Plant id must be positive")
     private Long plantId;
-    private String reminderType;  // "water", "fertilize", "repot"
+
+    @NotBlank(message = "Reminder type is required")
+    @Pattern(
+            regexp = "water|fertilize|repot",
+            message = "Reminder type must be water, fertilize, or repot"
+    )
+    private String reminderType;
+
+    @NotNull(message = "Due date is required")
+    @FutureOrPresent(message = "Due date cannot be past date")
     private LocalDate dueDate;
+
     @Column(name = "done", columnDefinition = "boolean default false")
     private Boolean done = false;
-
 }
