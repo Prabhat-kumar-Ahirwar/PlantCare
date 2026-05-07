@@ -35,11 +35,7 @@ public class Plant {
             regexp = "Indoor|Outdoor",
             message = "Location must be Indoor or Outdoor"
     )
-    @NotBlank(message = "Location is required")
-    @Pattern(
-            regexp = "Indoor|Outdoor",
-            message = "Location must be Indoor or Outdoor"
-    )
+
     private String location;
 
     @Pattern(
