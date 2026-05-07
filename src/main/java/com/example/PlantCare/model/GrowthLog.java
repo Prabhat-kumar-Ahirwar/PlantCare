@@ -20,6 +20,8 @@ import java.time.LocalDate;
 public class GrowthLog{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotNull(message = "Plant ID is required")
     @Positive(message = "Plant ID must be positive")
     private Long plantId;

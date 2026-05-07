@@ -27,8 +27,10 @@ public class WateringSchedule {
     @Positive(message = "PlantId must be positive")
     private Long plantId;
 
+    @NotNull(message = "Frequency is required")
     @Positive(message = "Frequency must be positive")
-    private int frequencyInDays;
+    private Integer frequencyInDays;
+
 
     @PastOrPresent(message = "Last watered date cannot be future")
     private LocalDate lastWateredAt;
