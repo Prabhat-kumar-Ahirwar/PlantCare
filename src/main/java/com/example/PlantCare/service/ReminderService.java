@@ -1,5 +1,6 @@
 package com.example.PlantCare.service;
 
+import com.example.PlantCare.ExceptionHandler.ResourceNotFoundException;
 import com.example.PlantCare.model.Reminder;
 import com.example.PlantCare.repository.ReminderRepo;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class ReminderService {
 
     public Reminder markDone(Long id) {
         Reminder r = reminderRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Reminder not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Reminder not found"));
         r.setDone(true);
         return reminderRepo.save(r);
     }
