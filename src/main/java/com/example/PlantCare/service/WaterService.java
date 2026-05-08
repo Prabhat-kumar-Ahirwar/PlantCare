@@ -1,6 +1,6 @@
 package com.example.PlantCare.service;
 
-import com.example.PlantCare.ExceptionHandler.ResourceNotFoundException;
+import com.example.PlantCare.ExceptionHandler.ScheduleNotFoundException;
 import com.example.PlantCare.model.WateringSchedule;
 import com.example.PlantCare.repository.WaterRepo;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class WaterService {
 
     public WateringSchedule markWatered(Long plantId) {
         WateringSchedule ws = waterRepo.findByPlantId(plantId)
-                .orElseThrow(() -> new ResourceNotFoundException("Schedule not found"));
+                .orElseThrow(() -> new ScheduleNotFoundException("Schedule not found"));
         ws.setLastWateredAt(LocalDate.now());
         ws.setNextWateringAt(LocalDate.now().plusDays(ws.getFrequencyInDays()));
         return waterRepo.save(ws);
@@ -31,6 +31,6 @@ public class WaterService {
 
     public WateringSchedule getSchedule(Long plantId) {
         return waterRepo.findByPlantId(plantId)
-                .orElseThrow(() -> new ResourceNotFoundException("Schedule not found"));
+                .orElseThrow(() -> new ScheduleNotFoundException("Schedule not found"));
     }
 }

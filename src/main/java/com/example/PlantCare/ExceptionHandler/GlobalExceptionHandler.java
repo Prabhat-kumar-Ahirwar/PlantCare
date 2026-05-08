@@ -11,14 +11,14 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handleResourceNotFound(ResourceNotFoundException ex) {
+    @ExceptionHandler(ReminderNotFoundException.class)
+    public ResponseEntity<?> handleResourceNotFound(ReminderNotFoundException ex) {
 
         Map<String, Object> error = new HashMap<>();
 
         error.put("timestamp", LocalDateTime.now());
         error.put("status", HttpStatus.NOT_FOUND.value());
-        error.put("error", "Resource Not Found");
+        error.put("error", "Reminder Not Found");
         error.put("message", ex.getMessage());
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
@@ -30,6 +30,16 @@ public class GlobalExceptionHandler {
         error.put("timestamp" , LocalDate.now());
         error.put("status", HttpStatus.NOT_FOUND.value());
         error.put("error" , "Plant Not Found!!!");
+        error.put("message",ex.getMessage());
+        return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
+
+    }
+    @ExceptionHandler(ScheduleNotFoundException.class)
+    public ResponseEntity<?> ScheduleNotFound(ScheduleNotFoundException ex){
+        Map<String ,Object> error = new HashMap<>();
+        error.put("timestamp" , LocalDate.now());
+        error.put("status", HttpStatus.NOT_FOUND.value());
+        error.put("error" , "Schedule Not Found!!!");
         error.put("message",ex.getMessage());
         return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
 

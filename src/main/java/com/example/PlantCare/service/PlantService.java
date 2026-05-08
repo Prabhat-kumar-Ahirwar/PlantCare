@@ -1,7 +1,6 @@
 package com.example.PlantCare.service;
 
 import com.example.PlantCare.ExceptionHandler.PlantNotFoundException;
-import com.example.PlantCare.ExceptionHandler.ResourceNotFoundException;
 import com.example.PlantCare.model.Plant;
 import com.example.PlantCare.repository.PlantRepo;
 import org.springframework.stereotype.Service;
