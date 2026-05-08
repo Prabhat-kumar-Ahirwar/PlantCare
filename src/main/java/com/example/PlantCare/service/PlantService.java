@@ -1,5 +1,6 @@
 package com.example.PlantCare.service;
 
+import com.example.PlantCare.ExceptionHandler.ResourceNotFoundException;
 import com.example.PlantCare.model.Plant;
 import com.example.PlantCare.repository.PlantRepo;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class PlantService {
     // Get by ID
     public Plant getPlantById(Long id) {
         return plantRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Plant not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Plant not found with id: " + id));
     }
 
     // Get by userId
