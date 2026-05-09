@@ -51,6 +51,13 @@ public class PlantService {
 
     // Delete
     public void deletePlant(Long id) {
+
+        if (!plantRepo.existsById(id)) {
+            throw new PlantNotFoundException(
+                    "Plant not found with id : " + id
+            );
+        }
+
         plantRepo.deleteById(id);
     }
 }
