@@ -30,4 +30,16 @@ public class GrowthController {
         growthService.deleteLog(id);
         return ResponseEntity.ok("Log deleted!");
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GrowthLog> updateLog(
+            @PathVariable Long id,
+            @RequestBody GrowthLog updatedLog) {
+
+        return ResponseEntity.ok(
+                growthService.updateLog(id, updatedLog)
+        );
+    }
+
 }
