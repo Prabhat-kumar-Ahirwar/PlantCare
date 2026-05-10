@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GrowthLog{
+public class GrowthLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
