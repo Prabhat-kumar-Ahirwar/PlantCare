@@ -1,23 +1,19 @@
 package com.example.PlantCare.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "growth_logs")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class GrowthLog {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,8 +22,6 @@ public class GrowthLog {
     @Positive(message = "Plant ID must be positive")
     private Long plantId;
 
-    @NotNull(message = "Date is required")
-    @PastOrPresent(message = "Added date cannot be future date")
     private LocalDate date;
 
     @NotNull(message = "Height is required")

@@ -1,18 +1,13 @@
 package com.example.PlantCare.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "watering_schedules")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,18 +18,16 @@ public class WateringSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "PlantId must be required")
-    @Positive(message = "PlantId must be positive")
+    @NotNull(message = "Plant ID is required")
+    @Positive(message = "Plant ID must be positive")
     private Long plantId;
 
     @NotNull(message = "Frequency is required")
     @Positive(message = "Frequency must be positive")
     private Integer frequencyInDays;
 
-
-    @PastOrPresent(message = "Last watered date cannot be future")
+    @PastOrPresent(message = "Last watered date cannot be in the future")
     private LocalDate lastWateredAt;
 
-    @FutureOrPresent(message = "Next watering date cannot be past")
     private LocalDate nextWateringAt;
 }
